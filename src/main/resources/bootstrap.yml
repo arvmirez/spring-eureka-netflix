@@ -1,0 +1,37 @@
+spring:
+  profiles : zone1
+application:
+  name: eureka-server
+server:
+  port: 8760
+eureka:
+  client:
+    registerWithEureka: false
+    fetchRegistry: false
+    instance:
+      hostname: uk-east-zone
+    serviceUrl:
+      defaultZone: http://uk-west-zone:8761/eureka/
+  server:
+    renewalPercentThreshold: 0.8
+    enableSelfRreservation: true
+
+---
+
+spring:
+  profiles: zone2
+  application:
+    name: eureka-server
+server:
+  port: 8761
+eureka:
+  client:
+    registerWithEureka: false
+    fetchRegistry: false
+    instance:
+      hostname: uk-west-zone
+    serviceUrl:
+      defaultZone: http://uk-east-zone:8760/eureka/
+  server:
+    renewalPercentThreshold: 0.8
+    enableSelfRreservation: true
